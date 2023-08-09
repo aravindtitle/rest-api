@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Add Product</title>
+  </head>
+  <body>
+    <form id="productForm" action="index.php" method="POST">
+      <label for="productName">Product Name:</label>
+      <input type="text" id="productName" name="productName" required /><br />
+
+      <label for="productPrice">Product Price:</label>
+      <input
+        type="number"
+        id="productPrice"
+        name="productPrice"
+        step="0.01"
+        required
+      /><br />
+
+      <button type="submit">Save Product</button>
+    </form>
+
+    <h2>Added Products:</h2>
+    <ul>
+        <?php
+        // Read and display added products from the text file
+        $products = file("products.txt", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        foreach ($products as $product) {
+            list($productName, $productPrice) = explode(" - ", $product);
+            echo "<li>$productName: $productPrice</li>";
+        }
+        ?>
+        
+    </ul>
+  </body>
+</html>
